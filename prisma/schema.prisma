@@ -1,0 +1,84 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model classes {
+  id               Int             @id @default(autoincrement())
+  classCode        String          @db.VarChar(50)
+  className        String          @db.VarChar(100)
+  teacherID        Int?
+  studentIDs       Json?
+  status           classes_status? @default(INSERT)
+  version          Int?            @default(1)
+  previous_hash    String?         @db.VarChar(64)
+  current_hash     String?         @db.VarChar(64)
+  nonce            Int?            @default(0)
+}
+
+model students {
+  id               Int              @id @default(autoincrement())
+  studentCode      String           @db.VarChar(50)
+  firstName        String           @db.VarChar(255)
+  lastName         String           @db.VarChar(255)
+  sex              students_sex
+  status           students_status? @default(INSERT)
+  version          Int?             @default(1)
+  previous_hash    String?          @db.VarChar(64)
+  current_hash     String?          @db.VarChar(64)
+  nonce            Int?             @default(0)
+}
+
+model teachers {
+  id               Int              @id @default(autoincrement())
+  teacherCode      String           @db.VarChar(50)
+  firstName        String           @db.VarChar(255)
+  lastName         String           @db.VarChar(255)
+  subject          String           @db.VarChar(100)
+  experienceYears  Int?
+  status           teachers_status? @default(INSERT)
+  version          Int?             @default(1)
+  previous_hash    String?          @db.VarChar(64)
+  current_hash     String?          @db.VarChar(64)
+  nonce            Int?             @default(0)
+}
+
+model users {
+  id       Int        @id @default(autoincrement())
+  username String     @unique(map: "username") @db.VarChar(50)
+  password String     @db.VarChar(100)
+  role     users_role
+}
+
+enum users_role {
+  admin
+  student
+  teacher
+}
+
+enum students_sex {
+  M
+  F
+}
+
+enum classes_status {
+  INSERT
+  UPDATE
+  DELETE
+}
+
+enum students_status {
+  INSERT
+  UPDATE
+  DELETE
+}
+
+enum teachers_status {
+  INSERT
+  UPDATE
+  DELETE
+}
