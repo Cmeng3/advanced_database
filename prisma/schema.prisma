@@ -8,17 +8,20 @@ datasource db {
 }
 
 model classes {
-  id               Int             @id @default(autoincrement())
-  classCode        String          @db.VarChar(50)
-  className        String          @db.VarChar(100)
-  teacherID        Int?
-  studentIDs       Json?
-  status           classes_status? @default(INSERT)
-  version          Int?            @default(1)
-  previous_hash    String?         @db.VarChar(64)
-  current_hash     String?         @db.VarChar(64)
-  nonce            Int?            @default(0)
+  id            Int      @id @default(autoincrement())
+  classCode     String   @db.VarChar(50)
+  className     String   @db.VarChar(100)
+  teacherID     Int?
+  studentIDs    Json?
+  date          DateTime? @db.Date
+  time          DateTime? @db.Time
+  status        classes_status? @default(INSERT)
+  version       Int?     @default(1)
+  previous_hash String?  @db.VarChar(64)
+  current_hash  String?  @db.VarChar(64)
+  nonce         Int?     @default(0)
 }
+
 
 model students {
   id               Int              @id @default(autoincrement())
