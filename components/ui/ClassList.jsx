@@ -76,7 +76,7 @@ export default function ClassList() {
                 <TableHead>Class Code</TableHead>
                 <TableHead>Class Name</TableHead>
                 <TableHead>Teacher ID</TableHead>
-                <TableHead>Status</TableHead>
+                
                 <TableHead>Date</TableHead>
                 <TableHead>Time</TableHead>
                 <TableHead className="text-right">Actions</TableHead>
@@ -90,7 +90,7 @@ export default function ClassList() {
                     <TableCell>{cls.classCode}</TableCell>
                     <TableCell>{cls.className}</TableCell>
                     <TableCell>{cls.teacherID}</TableCell>
-                    <TableCell>{cls.status}</TableCell>
+                    
                     <TableCell>
                       {cls.date ? format(new Date(cls.date), "yyyy-MM-dd") : "N/A"}
                     </TableCell>
