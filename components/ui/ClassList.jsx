@@ -2,8 +2,21 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/ui/table";
+import { format } from "date-fns"; // 📦 used for date formatting
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+} from "@/components/ui/card";
+import {
+  Table,
+  TableHeader,
+  TableBody,
+  TableRow,
+  TableHead,
+  TableCell,
+} from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
@@ -64,6 +77,8 @@ export default function ClassList() {
                 <TableHead>Class Name</TableHead>
                 <TableHead>Teacher ID</TableHead>
                 <TableHead>Status</TableHead>
+                <TableHead>Date</TableHead>
+                <TableHead>Time</TableHead>
                 <TableHead className="text-right">Actions</TableHead>
               </TableRow>
             </TableHeader>
@@ -76,9 +91,17 @@ export default function ClassList() {
                     <TableCell>{cls.className}</TableCell>
                     <TableCell>{cls.teacherID}</TableCell>
                     <TableCell>{cls.status}</TableCell>
+                    <TableCell>
+                      {cls.date ? format(new Date(cls.date), "yyyy-MM-dd") : "N/A"}
+                    </TableCell>
+                    <TableCell>
+                      {cls.time ? format(new Date(cls.time), "HH:mm") : "N/A"}
+                    </TableCell>
                     <TableCell className="text-right space-x-2">
                       <Link href={`/dashboard/classes/edit/${cls.classCode}`}>
-                        <Button variant="outline" size="sm">Edit</Button>
+                        <Button variant="outline" size="sm">
+                          Edit
+                        </Button>
                       </Link>
                       <Button
                         variant="destructive"
@@ -92,7 +115,9 @@ export default function ClassList() {
                 ))
               ) : (
                 <TableRow>
-                  <TableCell colSpan={5} className="text-center">No classes found.</TableCell>
+                  <TableCell colSpan={7} className="text-center">
+                    No classes found.
+                  </TableCell>
                 </TableRow>
               )}
             </TableBody>

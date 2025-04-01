@@ -2,8 +2,11 @@ import { PrismaClient } from '@prisma/client';
 import crypto from "crypto";
 const prisma = new PrismaClient();
 
+
+
 export async function GET() {
   try {
+    
     const classes = await prisma.classes.findMany({
       select: {
         id: true,
@@ -11,6 +14,8 @@ export async function GET() {
         className: true,
         teacherID: true,
         status: true,
+        date: true,
+        time: true,
       },
     });
 

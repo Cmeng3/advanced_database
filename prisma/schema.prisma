@@ -9,7 +9,7 @@ datasource db {
 
 model classes {
   id            Int      @id @default(autoincrement())
-  classCode     String   @db.VarChar(50)
+  classCode     String   @db.VarChar(50) @unique
   className     String   @db.VarChar(100)
   teacherID     Int?
   studentIDs    Json?
